@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRental.Business.Entities
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRental.Client.Entities", "CarRental.Client.Entities\CarRental.Client.Entities.csproj", "{8EEDF042-1D18-4C1F-BC24-A936E50E46F6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Common", "Core.Common\Core.Common.csproj", "{93B5319F-B5E2-4557-A133-2D6D775C4670}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Common.Contract", "Core.Common.Contract\Core.Common.Contract.csproj", "{FDEBBFA4-3ADD-47A6-81EB-56B17EAA7A2E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +33,14 @@ Global
 		{8EEDF042-1D18-4C1F-BC24-A936E50E46F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EEDF042-1D18-4C1F-BC24-A936E50E46F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8EEDF042-1D18-4C1F-BC24-A936E50E46F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93B5319F-B5E2-4557-A133-2D6D775C4670}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93B5319F-B5E2-4557-A133-2D6D775C4670}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93B5319F-B5E2-4557-A133-2D6D775C4670}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93B5319F-B5E2-4557-A133-2D6D775C4670}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDEBBFA4-3ADD-47A6-81EB-56B17EAA7A2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDEBBFA4-3ADD-47A6-81EB-56B17EAA7A2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDEBBFA4-3ADD-47A6-81EB-56B17EAA7A2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDEBBFA4-3ADD-47A6-81EB-56B17EAA7A2E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -36,5 +48,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{86B96882-6115-419B-9010-06C4E683D410} = {6F634B08-75E0-4811-AEEF-4C26C1A3711B}
 		{8EEDF042-1D18-4C1F-BC24-A936E50E46F6} = {DE57FC25-58BA-417D-A032-E26AA335AB7D}
+		{93B5319F-B5E2-4557-A133-2D6D775C4670} = {CDD8CE59-A42A-461F-89A9-977E510B7094}
+		{FDEBBFA4-3ADD-47A6-81EB-56B17EAA7A2E} = {CDD8CE59-A42A-461F-89A9-977E510B7094}
 	EndGlobalSection
 EndGlobal
