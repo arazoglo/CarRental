@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Common.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CarRental.Client.Entities
 {
-    public class Car
+    public class Car : TempObjectBase
     {
         int _CarId;
         string _Description;
@@ -17,73 +18,79 @@ namespace CarRental.Client.Entities
 
         public int CarId
         {
-            get
-            {
-                return _CarId;
-            }
+            get { return _CarId; }
             set
             {
-                _CarId = value;
+                if(_CarId != value)
+                {
+                    _CarId = value;
+                    OnPropertyChanged(() => CarId);
+                }
             }
         }
 
         public string Description
         {
-            get
-            {
-                return _Description;
-            }
+            get { return _Description; }
             set
             {
-                _Description = value;
+                if(_Description != value)
+                { 
+                    _Description = value;  
+                    OnPropertyChanged(() => Description);
+                }
             }
         }
 
         public string Color
         {
-            get
-            {
-                return _Color;
-            }
+            get { return _Color; }
             set
             {
-                _Color = value;
+                if(_Color != value)
+                {
+                    _Color = value;
+                    OnPropertyChanged(() => Color);
+                }
             }
         }
 
         public int Year
         {
-            get
-            {
-                return _Year;
-            }
+            get { return _Year;  }
             set
             {
-                _Year = value;
+                if(_Year != value)
+                {
+                    _Year = value;
+                    OnPropertyChanged(() => Year);
+                }
             }
         }
 
         public decimal RentalPrice
         {
-            get
-            {
-                return _RentalPrice;
-            }
+            get { return _RentalPrice;  }
             set
             {
-                _RentalPrice = value;
+                if(_RentalPrice != value)
+                {
+                    _RentalPrice = value;
+                    OnPropertyChanged(() => RentalPrice);
+                }
             }
         }
 
         public bool CurrentlyRented
         {
-            get
-            {
-                return _CurrentlyRented;
-            }
+            get { return _CurrentlyRented; }
             set
             {
-                _CurrentlyRented = value;
+                if(_CurrentlyRented != value)
+                {
+                    _CurrentlyRented = value;
+                    OnPropertyChanged(() => CurrentlyRented);
+                }
             }
         }
 
