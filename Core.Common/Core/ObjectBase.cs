@@ -12,9 +12,9 @@ using Core.Common.Extensions;
 
 namespace Core.Common.Core
 {
-    public class TempObjectBase : INotifyPropertyChanged
+    public class ObjectBase : INotifyPropertyChanged 
     {
-        public event PropertyChangedEventHandler _PropertyChanged;     
+        public event PropertyChangedEventHandler _PropertyChanged;
 
         List<PropertyChangedEventHandler> _PropertyChangedSubscribers
             = new List<PropertyChangedEventHandler>();
@@ -23,7 +23,7 @@ namespace Core.Common.Core
         {
             add
             {
-                if(!_PropertyChangedSubscribers.Contains(value))
+                if (!_PropertyChangedSubscribers.Contains(value))
                 {
                     _PropertyChanged += value;
                     _PropertyChangedSubscribers.Add(value);
@@ -43,20 +43,20 @@ namespace Core.Common.Core
         protected virtual void OnPropertyChanged(string propertyName, bool makeDirty)
         {
             if (_PropertyChanged != null)
-                _PropertyChanged(this, new PropertyChangedEventArgs(propertyName)); 
- 
+                _PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+
             if (makeDirty)
                 _IsDirty = true;
-        }       
-        
+        }
+
         protected virtual void OnPropertyChanged<T>(Expression<Func<T>> propertyExpression)
         {
             string propertyName = PropertySupport.ExtractPropertyName(propertyExpression);
             OnPropertyChanged(propertyName);
-        }  
+        }
 
         bool _IsDirty;
-                                      
+
         #region IDirtyCapable memebers
 
         [NotNavigable]
@@ -64,11 +64,11 @@ namespace Core.Common.Core
         {
             get { return _IsDirty; }
             set { _IsDirty = value; }
-        }                       
+        }
 
-        public List<TempObjectBase> GetDirtyObjects()
+        public List<ObjectBase> GetDirtyObjects()
         {
-            List<TempObjectBase> dirtyObjects = new List<TempObjectBase>();
+            List<ObjectBase> dirtyObjects = new List<ObjectBase>();
 
             WalkObjectGraph(
                 o =>
@@ -109,62 +109,62 @@ namespace Core.Common.Core
                     else
                         return false;//short circuit
                 }, coll => { });
-            
+
             return isDirty;
         }
 
         #endregion
-        
+
         #region Protected methos
 
-        protected void WalkObjectGraph(Func<TempObjectBase, bool> snippetForObject,
+        protected void WalkObjectGraph(Func<ObjectBase, bool> snippetForObject,
                                        Action<IList> snippetForCollection,
                                        params string[] exemptProperties)
         {
-            List<TempObjectBase> visited = new List<TempObjectBase>();
-            Action<TempObjectBase> walk = null;
+            List<ObjectBase> visited = new List<ObjectBase>();
+            Action<ObjectBase> walk = null;
 
             List<string> exemptions = new List<string>();
             if (exemptProperties != null)
                 exemptions = exemptProperties.ToList();
 
             walk = (o) =>
+            {
+                if (o != null && !visited.Contains(o))
                 {
-                    if (o != null && !visited.Contains(o))
+                    visited.Add(o);
+
+                    bool exitWalk = snippetForObject.Invoke(o);
+
+                    if (!exitWalk)
                     {
-                        visited.Add(o);
-
-                        bool exitWalk = snippetForObject.Invoke(o);
-
-                        if(!exitWalk)
+                        PropertyInfo[] properties = o.GetBrowsableProperties();
+                        foreach (PropertyInfo property in properties)
                         {
-                            PropertyInfo[] properties = o.GetBrowsableProperties();
-                            foreach (PropertyInfo property in properties)
+                            if (property.PropertyType.IsSubclassOf(typeof(ObjectBase)))
                             {
-                                if (property.PropertyType.IsSubclassOf(typeof(TempObjectBase)))
+                                ObjectBase obj = (ObjectBase)(property.GetValue(o, properties));
+                                walk(obj);
+                            }
+                            else
+                            {
+                                IList coll = property.GetValue(o, null) as IList;
+                                if (coll != null)
                                 {
-                                    TempObjectBase obj = (TempObjectBase)(property.GetValue(o, properties));
-                                    walk(obj);
-                                }
-                                else
-                                {
-                                    IList coll = property.GetValue(o, null) as IList;
-                                    if (coll != null)
+                                    snippetForCollection.Invoke(coll);
+
+                                    foreach (object item in coll)
                                     {
-                                        snippetForCollection.Invoke(coll);
-
-                                        foreach (object item in coll)
-                                        {
-                                            if (item is TempObjectBase)
-                                                walk((TempObjectBase)item);
-                                        }
-
+                                        if (item is ObjectBase)
+                                            walk((ObjectBase)item);
                                     }
+
                                 }
                             }
-                        }                 
+                        }
                     }
-                };
+                }
+            };
 
             walk(this);
         }
