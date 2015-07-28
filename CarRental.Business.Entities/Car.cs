@@ -30,6 +30,7 @@ namespace CarRental.Business.Entities
         [DataMember]
         public bool CurrentlyRented { get; set; }
 
+        #region IIdentifiableEntity memebers
         public int EntityId 
         {
             get
@@ -37,6 +38,7 @@ namespace CarRental.Business.Entities
             set
             {CarId = value;}
         }
+        #endregion
 
     }
 }

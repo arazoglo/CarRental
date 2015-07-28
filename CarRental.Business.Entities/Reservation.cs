@@ -27,5 +27,20 @@ namespace CarRental.Business.Entities
         [DataMember]
         public DateTime ReturnDate { get; set; }
 
+        #region IIdentifiableEntity members
+
+        public int EntityId
+        {
+            get { return ReservationId; }
+            set { ReservationId = value; }
+        }
+        #endregion
+
+        #region IAccountOwnedEntity memebers
+        int IAccountOwnedEntity.OwnerAccountId
+        {
+            get { return AccountId; }
+        }
+        #endregion
     }
 }

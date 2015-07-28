@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Core.Common.Contract
 {
-    class IAccountOwnedEntity
+    public interface IAccountOwnedEntity
     {
+        int OwnerAccountId { get; }
     }
 }

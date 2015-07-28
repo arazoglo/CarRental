@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8EEDF042-1D18-4C1F-BC24-A936E50E46F6}</ProjectGuid>
+    <ProjectGuid>{2661A979-40F5-4AD0-8852-A22C032BE22C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CarRental.Client.Entities</RootNamespace>
-    <AssemblyName>CarRental.Client.Entities</AssemblyName>
+    <RootNamespace>CarRental.Business.Bootstrapper</RootNamespace>
+    <AssemblyName>CarRental.Business.Bootstrapper</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,13 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FluentValidation, Version=5.6.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FluentValidation.5.6.2.0\lib\Net45\FluentValidation.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,23 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account.cs" />
-    <Compile Include="Car.cs" />
+    <Compile Include="MEFLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rental.cs" />
-    <Compile Include="Reservation.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Core.Common.Contract\Core.Common.Contract.csproj">
-      <Project>{fdebbfa4-3add-47a6-81eb-56b17eaa7a2e}</Project>
-      <Name>Core.Common.Contract</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Core.Common\Core.Common.csproj">
-      <Project>{93b5319f-b5e2-4557-a133-2d6d775c4670}</Project>
-      <Name>Core.Common</Name>
+    <ProjectReference Include="..\CarRental.Data\CarRental.Data.csproj">
+      <Project>{c2c3decf-43e0-4a21-844a-6a717407703f}</Project>
+      <Name>CarRental.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Core.Common.Contract
 {
-    class IIdentifiableEntity
+    public interface IIdentifiableEntity
     {
+        int EntityId { get; set; }
     }
 }
