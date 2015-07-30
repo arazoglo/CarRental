@@ -14,7 +14,7 @@ namespace CarRental.Data
     public class CarRentalContext : DbContext
     {
         public CarRentalContext()
-            :base ("name-CarRental")
+            :base ("CarRental")
         {
             Database.SetInitializer<CarRentalContext>(null);
         }                                                   
