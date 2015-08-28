@@ -30,7 +30,7 @@ namespace CarRental.Data.Test
 
             IEnumerable<Car> cars = repositoryTest.GetCars();
 
-            //Assert.IsTrue(cars != null);
+            Assert.IsTrue(cars != null);
         }
 
         [TestMethod]
